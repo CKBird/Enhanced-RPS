@@ -50,6 +50,8 @@ int main()
 					}
 				}
 				int winner = evaluate.getWinner(playerChoice, AIchoice);
+				
+				//FROM HERE 
 				string player, computer;
 				if(playerChoice == 1)
 					player = "Scissors";
@@ -104,6 +106,7 @@ int main()
 			cout << "Games lost: " << lost << " -- Percentage: " << (lost/played)*100 << "%" << endl;
 			cout << "Games tied: " << tied << " -- Percentage: " << (tied/played)*100 << "%" << endl;
 			cout << "Total played: " << played << endl << endl;
+			//TO HERE, IS THE SAME EVERY TIME, MAKE NEW CLASS
 		}
 		else if(choice == 2) {
 			cout << "\nThe rules are simple!" << endl;

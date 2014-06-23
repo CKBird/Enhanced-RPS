@@ -41,15 +41,15 @@ void AIOptions::setCounterAI(int past) {
 			past = 5;
 			selection = past;
 		}
-		else if(random == 0 && past < 4) {
+		else if(random == 2 && past < 4) {
 			past = past + 2;
 			selection = past;
 		}
-		else if(random == 0 && past == 4) {
+		else if(random == 2 && past == 4) {
 			past = 1;
 			selection = past;
 		}
-		else if(random == 0 && past == 5) {
+		else if(random == 2 && past == 5) {
 			past = 2;
 			selection = past;
 		}
