@@ -26,6 +26,25 @@ int AIOptions::getBasicAI() {
 	return selection;
 }
 
+void AIOptions::setCounterAI(int past) {
+	if(past == 0) {
+		int random = rand() % 5 + 1;
+		selection = random;
+	}
+	else {
+		if(past == 1)
+			selection = 5;
+		else {
+			past--;
+			selection = past;
+		}
+	}
+}
+
+int AIOptions::getCounterAI() {
+	return selection;
+}
+
 Evaluate::Evaluate() {
 	winner = -1;
 } //evaluate constructor

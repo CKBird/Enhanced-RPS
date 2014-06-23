@@ -14,6 +14,8 @@ public:
 	AIOptions();
 	void setBasicAI();
 	int getBasicAI();
+	void setCounterAI(int past);
+	int getCounterAI();
 	
 private:
 	int selection;

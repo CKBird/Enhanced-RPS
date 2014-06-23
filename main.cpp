@@ -1,19 +1,4 @@
 //Rock Paper Scissor Lizard Spock
-//1st: 	Design a simple program that will play the game with the user
-//		User will choose 1 of the 5 inputs from given list by using number key
-//		Computer will randomly choose
-//		**Create normal RPS player as well if interested
-//2nd:	Add different AI choices who choose different moves
-//		"Extra Lottery Ticket" type AI
-//		Stubborn Player type AI (Always chooses one of two)
-//		Always chooses one to counter last user input (Default to rock on turn 1)
-//		Chooses based on players sequence
-//		Chooses based on player's most picked, and beats it
-//		Etc. Make up more as you go
-//3rd:	Have two AIs battle against eachother
-//		Calculate Results based on 10k games
-//		Design bots to mimic types of people and determine which strategy
-//			is the best
 
 #include <string>
 #include <fstream>
@@ -27,7 +12,8 @@ using namespace std;
 int main()
 {
 	int choice = 0;
-	AIOptions aioptions;
+	AIOptions aioptions1;
+	AIOptions aioptions2;
 	Evaluate evaluate;
 	while(choice != -1) {
 		cout << "Welcome to Rock-Paper-Scissors-Lizard-Spock!" << endl;
@@ -36,7 +22,8 @@ int main()
 		cout << "2: See the Rules" << endl;
 		cout << "3: See the About Page" << endl;
 		cout << "4: Basic AI vs Basic AI" << endl;
-		cout << "5: End the program" << endl;
+		cout << "5: Other AI vs AI Matches" << endl;
+		cout << "6: End the program" << endl;
 		
 		cin >> choice;
 		
@@ -45,8 +32,8 @@ int main()
 			int again = 1;
 			float won = 0.0, lost = 0.0, tied = 0.0, played = 0.0;
 			while(again == 1) {
-				aioptions.setBasicAI();
-				int AIchoice = aioptions.getBasicAI(); //Gets computer choice
+				aioptions1.setBasicAI();
+				int AIchoice = aioptions1.getBasicAI(); //Gets computer choice
 				
 				int playerChoice = 0;
 				while(playerChoice == 0) {
@@ -129,19 +116,15 @@ int main()
 		else if(choice == 3) {
 			cout << "Program Written By Christopher Bird on June 23rd, 2014\n" << endl;
 		}
-		else if(choice == 5) {
-			choice = -1;
-			cout << "Game Ended!\n" << endl;
-		}
-		else if(choice == 4) {
+		else if(choice == 4) { //40/40/20 Rate
 			//Play the game here
 			int again = 0;
 			float won = 0.0, lost = 0.0, tied = 0.0, played = 0.0;
 			while(again < 10000) {
-				aioptions.setBasicAI();
-				int bot1 = aioptions.getBasicAI(); //Gets computer choice
-				aioptions.setBasicAI();
-				int bot2 = aioptions.getBasicAI();
+				aioptions1.setBasicAI();
+				int bot1 = aioptions1.getBasicAI(); //Gets computer choice
+				aioptions1.setBasicAI();
+				int bot2 = aioptions1.getBasicAI();
 				int winner = evaluate.getWinner(bot1, bot2);
 				
 				string player, computer;
@@ -171,13 +154,13 @@ int main()
 				cout << "Bot 2 Chose: " << computer << endl;
 				
 				if(winner == 1) {
-					cout << "Bot1 won!\n" << endl;
+					cout << "Bot 1 won!\n" << endl;
 					won++;
 					played++;
 					again++;
 				}
 				else if(winner == 2) {
-					cout << "Bot1 lost!\n" << endl;
+					cout << "Bot 2 won!\n" << endl;
 					lost++;
 					played++;
 					again++;
@@ -191,10 +174,156 @@ int main()
 				else
 					cout << "ERROR!\n" << endl;
 			}
-			cout << "Games Bot1 won: " << won << " -- Percentage: " << (won/played)*100 << "%" << endl;
-			cout << "Games Bot1 lost: " << lost << " -- Percentage: " << (lost/played)*100 << "%" << endl;
+			cout << "Games Bot 1 won: " << won << " -- Percentage: " << (won/played)*100 << "%" << endl;
+			cout << "Games Bot 2 won: " << lost << " -- Percentage: " << (lost/played)*100 << "%" << endl;
 			cout << "Games they tied: " << tied << " -- Percentage: " << (tied/played)*100 << "%" << endl;
 			cout << "Total played: " << played << endl << endl;
+		}
+		else if(choice == 5) {
+			int subChoice = 0;
+			cout << "Please select which match you would like to simulate" << endl;
+			cout << "1: Counter AI vs Basic AI" << endl;
+			cout << "2: Counter AI vs Counter AI" << endl;
+			cout << "3: Main Menu" << endl;
+			cin >> subChoice;
+			
+			if(subChoice == 1) { //Remains 40/40/20
+				int again = 0;
+				float won = 0.0, lost = 0.0, tied = 0.0, played = 0.0;
+				int bot1 = 0;
+				int bot2 = 0;
+				while(again < 10000) {
+					aioptions1.setCounterAI(bot2);
+					bot1 = aioptions1.getCounterAI(); //Gets computer choice
+					aioptions1.setBasicAI();
+					bot2 = aioptions1.getBasicAI();
+					int winner = evaluate.getWinner(bot1, bot2);
+					
+					string player, computer;
+					if(bot1 == 1)
+						player = "Scissors";
+					else if(bot1 == 2)
+						player = "Paper";
+					else if(bot1 == 3)
+						player = "Rock";
+					else if(bot1 == 4)
+						player = "Lizard";
+					else
+						player = "Spock";
+						
+					if(bot2 == 1)
+						computer = "Scissors";
+					else if(bot2 == 2)
+						computer = "Paper";
+					else if(bot2 == 3)
+						computer = "Rock";
+					else if(bot2 == 4)
+						computer = "Lizard";
+					else
+						computer = "Spock";
+						
+					cout << "Bot 1 Chose: " << player << endl;
+					cout << "Bot 2 Chose: " << computer << endl;
+					
+					if(winner == 1) {
+						cout << "Bot1 won!\n" << endl;
+						won++;
+						played++;
+						again++;
+					}
+					else if(winner == 2) {
+						cout << "Bot2 won!\n" << endl;
+						lost++;
+						played++;
+						again++;
+					}
+					else if(winner == 3) {
+						cout << "They tied!\n" << endl;
+						tied++;
+						played++;
+						again++;
+					}
+					else
+						cout << "ERROR!\n" << endl;
+				}
+				cout << "Games Bot 1 won: " << won << " -- Percentage: " << (won/played)*100 << "%" << endl;
+				cout << "Games Bot 2 won: " << lost << " -- Percentage: " << (lost/played)*100 << "%" << endl;
+				cout << "Games they tied: " << tied << " -- Percentage: " << (tied/played)*100 << "%" << endl;
+				cout << "Total played: " << played << endl << endl;
+			}
+			if(subChoice == 2) { //If tie on round 1, 100% tie, otherwise, 50% W/L
+				int again = 0;
+				float won = 0.0, lost = 0.0, tied = 0.0, played = 0.0;
+				int bot1 = 0;
+				int bot2 = 0;
+				while(again < 10000) {
+					aioptions1.setCounterAI(bot2);
+					aioptions2.setCounterAI(bot1);
+					bot1 = aioptions1.getCounterAI();
+					bot2 = aioptions2.getCounterAI();
+					int winner = evaluate.getWinner(bot1, bot2);
+					
+					string player, computer;
+					if(bot1 == 1)
+						player = "Scissors";
+					else if(bot1 == 2)
+						player = "Paper";
+					else if(bot1 == 3)
+						player = "Rock";
+					else if(bot1 == 4)
+						player = "Lizard";
+					else
+						player = "Spock";
+						
+					if(bot2 == 1)
+						computer = "Scissors";
+					else if(bot2 == 2)
+						computer = "Paper";
+					else if(bot2 == 3)
+						computer = "Rock";
+					else if(bot2 == 4)
+						computer = "Lizard";
+					else
+						computer = "Spock";
+						
+					cout << "Bot 1 Chose: " << player << endl;
+					cout << "Bot 2 Chose: " << computer << endl;
+					
+					if(winner == 1) {
+						cout << "Bot1 won!\n" << endl;
+						won++;
+						played++;
+						again++;
+					}
+					else if(winner == 2) {
+						cout << "Bot2 won!\n" << endl;
+						lost++;
+						played++;
+						again++;
+					}
+					else if(winner == 3) {
+						cout << "They tied!\n" << endl;
+						tied++;
+						played++;
+						again++;
+					}
+					else
+						cout << "ERROR!\n" << endl;
+				}
+				cout << "Games Bot 1 won: " << won << " -- Percentage: " << (won/played)*100 << "%" << endl;
+				cout << "Games Bot 2 won: " << lost << " -- Percentage: " << (lost/played)*100 << "%" << endl;
+				cout << "Games they tied: " << tied << " -- Percentage: " << (tied/played)*100 << "%" << endl;
+				cout << "Total played: " << played << endl << endl;
+			}
+			else if(subChoice == 3) {
+				cout << "Returning to Main Menu" << endl;
+			}
+			else
+				cout << "Please enter either 1 or 2" << endl;
+		}
+		else if(choice == 6) {
+			choice = -1;
+			cout << "Game Ended!\n" << endl;
 		}
 		else {
 			cout << "Please enter a number between 1 and 5!\n" << endl;
