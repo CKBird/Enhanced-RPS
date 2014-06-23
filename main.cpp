@@ -35,8 +35,8 @@ int main()
 		cout << "1: Play against Computer" << endl;
 		cout << "2: See the Rules" << endl;
 		cout << "3: See the About Page" << endl;
-		cout << "4: End the program" << endl;
-		cout << "5: Basic AI vs Basic AI" << endl;
+		cout << "4: Basic AI vs Basic AI" << endl;
+		cout << "5: End the program" << endl;
 		
 		cin >> choice;
 		
@@ -129,22 +129,21 @@ int main()
 		else if(choice == 3) {
 			cout << "Program Written By Christopher Bird on June 23rd, 2014\n" << endl;
 		}
-		else if(choice == 4) {
+		else if(choice == 5) {
 			choice = -1;
 			cout << "Game Ended!\n" << endl;
 		}
-		else if(choice == 5) {
+		else if(choice == 4) {
 			//Play the game here
 			int again = 0;
 			float won = 0.0, lost = 0.0, tied = 0.0, played = 0.0;
 			while(again < 10000) {
 				aioptions.setBasicAI();
 				int bot1 = aioptions.getBasicAI(); //Gets computer choice
-				
 				aioptions.setBasicAI();
 				int bot2 = aioptions.getBasicAI();
-				
 				int winner = evaluate.getWinner(bot1, bot2);
+				
 				string player, computer;
 				if(bot1 == 1)
 					player = "Scissors";
