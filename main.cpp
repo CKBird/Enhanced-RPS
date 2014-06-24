@@ -3,8 +3,6 @@
 #include <string>
 #include <fstream>
 #include <iostream>
-#include <ctype.h>
-#include <cstdio>
 #include "RPS.h"
 
 using namespace std;
@@ -30,6 +28,7 @@ int main()
 			//Play the game here
 			int again = 1;
 			gamePlay gameplay;
+			gameplay.setPlayerID(1);
 			while(again == 1) {
 				aioptions1.setBasicAI();
 				int AIchoice = aioptions1.getBasicAI(); //Gets computer choice
@@ -68,14 +67,17 @@ int main()
 			//Play the game here
 			int again = 0;
 			gamePlay gameplay;
+			gameplay.setPlayerID(0);
 			while(again < 10000) {
 				aioptions1.setBasicAI();
-				int bot1 = aioptions1.getBasicAI(); //Gets computer choice
+				int bot1 = aioptions1.getBasicAI();
 				aioptions1.setBasicAI();
 				int bot2 = aioptions1.getBasicAI();
+				
 				gameplay.playTheGame(bot1, bot2);
 				again++;
 			}
+			gameplay.printStats();
 		}
 		else if(choice == 5) {
 			int subChoice = 0;
@@ -90,25 +92,29 @@ int main()
 				int bot1 = 0;
 				int bot2 = 0;
 				gamePlay gameplay;
+				gameplay.setPlayerID(0);
 				while(again < 10000) {
 					aioptions1.setCounterAI(bot2);
-					bot1 = aioptions1.getCounterAI(); //Gets computer choice
+					bot1 = aioptions1.getCounterAI();
 					aioptions1.setBasicAI();
 					bot2 = aioptions1.getBasicAI();
+					
 					gameplay.playTheGame(bot1, bot2);
 					again++;
 				}
 			}
-			if(subChoice == 2) { //If tie on round 1, 100% tie, otherwise, 50% W/L
+			if(subChoice == 2) {
 				int again = 0;
 				int bot1 = 0;
 				int bot2 = 0;
 				gamePlay gameplay;
+				gameplay.setPlayerID(0);
 				while(again < 10000) {
 					aioptions1.setCounterAI(bot2);
 					aioptions2.setCounterAI(bot1);
 					bot1 = aioptions1.getCounterAI();
 					bot2 = aioptions2.getCounterAI();
+					
 					gameplay.playTheGame(bot1, bot2);
 					again++;
 				}

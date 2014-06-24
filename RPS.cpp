@@ -59,6 +59,14 @@ void AIOptions::setCounterAI(int past) {
 int AIOptions::getCounterAI() {
 	return selection;
 }
+/*
+void AIOptions::(int past) { 
+		
+}	
+
+int AIOptions::() {
+	return selection;
+}	*/
 
 gamePlay::gamePlay() {
 	winner = -1;
@@ -66,6 +74,14 @@ gamePlay::gamePlay() {
 	bot2 = 0.0;
 	played = 0.0;
 	tied = 0.0;
+	playerID = 0;
+	for(int i = 0; i < 5; i++)
+		for(int j = 0; j < 5; j++)
+			choiceStats[i][j] = 0;
+	for(int i = 0; i < 5; i++)
+		bot1Choice[i] = 0;
+	for(int i = 0; i < 5; i++)
+		bot2Choice[i] = 0;
 } //evaluate constructor
 
 void gamePlay::playTheGame(int playerChoice, int computerChoice) { 	//input to this function will be ints of what each character played
@@ -106,7 +122,9 @@ void gamePlay::playTheGame(int playerChoice, int computerChoice) { 	//input to t
 	//Player wins, return 1
 	//Computer wins, return 2
 	//Tie, return 3
-	
+	choiceStats[playerChoice-1][computerChoice-1]++; //Player is verticle, computer is horiz
+	bot1Choice[playerChoice-1]++;
+	bot2Choice[computerChoice-1]++;
 	if(playerChoice == 1) {
 		if(computerChoice == 2 || computerChoice == 4) 
 			winner = 1;
@@ -151,29 +169,69 @@ void gamePlay::playTheGame(int playerChoice, int computerChoice) { 	//input to t
 		winner = 0;
 		
 	//Display Results
-	
-	if(winner == 1) {
-		cout << "Bot 1 won!\n" << endl;
-		bot1++;
-		played++;
+	if(playerID == 1) { //Player is HUMAN
+		if(winner == 1) {
+			cout << "You won!\n" << endl;
+			bot1++;
+			played++;
 
+		}
+		else if(winner == 2) {
+			cout << "You lost!\n" << endl;
+			bot2++;
+			played++;
+		}
+		else if(winner == 3) {
+			cout << "You tied!\n" << endl;
+			tied++;
+			played++;
+		}
+		else
+			cout << "ERROR!\n" << endl;
+		cout << "Games you won: " << bot1 << " -- Percentage: " << (bot1/played)*100 << "%" << endl;
+		cout << "Games you lost: " << bot2 << " -- Percentage: " << (bot2/played)*100 << "%" << endl;
+		cout << "Games you tied: " << tied << " -- Percentage: " << (tied/played)*100 << "%" << endl;
+		cout << "Total played: " << played << endl << endl;
 	}
-	else if(winner == 2) {
-		cout << "Bot 2 won!\n" << endl;
-		bot2++;
-		played++;
-	}
-	else if(winner == 3) {
-		cout << "They tied!\n" << endl;
-		tied++;
-		played++;
-	}
-	else
-		cout << "ERROR!\n" << endl;
+	else if(playerID == 0) { //Player is BOT
+		if(winner == 1) {
+			cout << "Bot 1 won!\n" << endl;
+			bot1++;
+			played++;
+
+		}
+		else if(winner == 2) {
+			cout << "Bot 2 won!\n" << endl;
+			bot2++;
+			played++;
+		}
+		else if(winner == 3) {
+			cout << "They tied!\n" << endl;
+			tied++;
+			played++;
+		}
+		else
+			cout << "ERROR!\n" << endl;
 		
-	//Display Stats
-	cout << "Games Bot 1 won: " << bot1 << " -- Percentage: " << (bot1/played)*100 << "%" << endl;
-	cout << "Games Bot 2 won: " << bot2 << " -- Percentage: " << (bot2/played)*100 << "%" << endl;
-	cout << "Games they tied: " << tied << " -- Percentage: " << (tied/played)*100 << "%" << endl;
-	cout << "Total played: " << played << endl << endl;
+		cout << "Games Bot 1 won: " << bot1 << " -- Percentage: " << (bot1/played)*100 << "%" << endl;
+		cout << "Games Bot 2 won: " << bot2 << " -- Percentage: " << (bot2/played)*100 << "%" << endl;
+		cout << "Games they tied: " << tied << " -- Percentage: " << (tied/played)*100 << "%" << endl;
+		cout << "Total played: " << played << endl << endl;
+	}
+}
+
+void gamePlay::printStats() {
+		cout << "Game Stats for all the rounds, Bot 1's choice is on the left" << endl;
+		for(int i = 0; i < 5; i++) {
+			for(int j = 0; j < 5; j++) {
+				cout << choiceStats[i][j] << " ";
+			}
+			cout << endl;
+		}
+		cout << endl;
+		cout << "Bot1 --- Bot2 --- Choice" << endl;
+		for(int i = 0; i < 5; i++) {
+			cout << bot1Choice[i] << " --- " << bot2Choice[i] << " --- " << i+1 << endl;
+		}
+		cout << endl;
 }
