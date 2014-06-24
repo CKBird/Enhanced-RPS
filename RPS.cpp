@@ -82,6 +82,16 @@ gamePlay::gamePlay() {
 		bot1Choice[i] = 0;
 	for(int i = 0; i < 5; i++)
 		bot2Choice[i] = 0;
+	types[0] = "Scissors";
+	types[1] = "Paper";
+	types[2] = "Rock";
+	types[3] = "Lizard";
+	types[4] = "Spock";
+	typesInit[0] = "S";
+	typesInit[1] = "P";
+	typesInit[2] = "R";
+	typesInit[3] = "L";
+	typesInit[4] = "K";
 } //evaluate constructor
 
 void gamePlay::playTheGame(int playerChoice, int computerChoice) { 	//input to this function will be ints of what each character played
@@ -222,7 +232,9 @@ void gamePlay::playTheGame(int playerChoice, int computerChoice) { 	//input to t
 
 void gamePlay::printStats() {
 		cout << "Game Stats for all the rounds, Bot 1's choice is on the left" << endl;
+		cout << "-- S   P   R   L   K" << endl;
 		for(int i = 0; i < 5; i++) {
+			cout << typesInit[i] << " ";
 			for(int j = 0; j < 5; j++) {
 				cout << choiceStats[i][j] << " ";
 			}
@@ -230,8 +242,9 @@ void gamePlay::printStats() {
 		}
 		cout << endl;
 		cout << "Bot1 --- Bot2 --- Choice" << endl;
+		cout << "-------------------------" << endl;
 		for(int i = 0; i < 5; i++) {
-			cout << bot1Choice[i] << " --- " << bot2Choice[i] << " --- " << i+1 << endl;
+			cout << bot1Choice[i] << " --- " << bot2Choice[i] << " --- " << types[i] << endl;
 		}
 		cout << endl;
 }

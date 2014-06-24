@@ -51,6 +51,7 @@ int main()
 				cout << "Play Again? 1 for yes, 2 for no" << endl;
 				cin >> again;
 			}
+			gameplay.printStats();
 		}
 		else if(choice == 2) {
 			cout << "\nThe rules are simple!" << endl;
@@ -102,6 +103,7 @@ int main()
 					gameplay.playTheGame(bot1, bot2);
 					again++;
 				}
+				gameplay.printStats();
 			}
 			if(subChoice == 2) {
 				int again = 0;
@@ -118,6 +120,7 @@ int main()
 					gameplay.playTheGame(bot1, bot2);
 					again++;
 				}
+				gameplay.printStats();
 			}
 			else if(subChoice == 3) {
 				cout << "Returning to Main Menu" << endl;

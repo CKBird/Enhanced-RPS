@@ -40,6 +40,8 @@ private:
 	int choiceStats[5][5];
 	int bot1Choice[5];
 	int bot2Choice[5];
+	string types[5];
+	string typesInit[5];
 };
 
 #endif
