@@ -60,11 +60,43 @@ int AIOptions::getCounterAI() {
 	return selection;
 }
 
-Evaluate::Evaluate() {
+gamePlay::gamePlay() {
 	winner = -1;
+	bot1 = 0.0;
+	bot2 = 0.0;
+	played = 0.0;
+	tied = 0.0;
 } //evaluate constructor
 
-int Evaluate::getWinner(int player, int computer) {
+void gamePlay::playTheGame(int playerChoice, int computerChoice) { 	//input to this function will be ints of what each character played
+																	//Will print game stats (X beat Y with X)
+	string player, computer;
+	if(playerChoice == 1)
+		player = "Scissors";
+	else if(playerChoice == 2)
+		player = "Paper";
+	else if(playerChoice == 3)
+		player = "Rock";
+	else if(playerChoice == 4)
+		player = "Lizard";
+	else
+		player = "Spock";
+		
+	if(computerChoice == 1)
+		computer = "Scissors";
+	else if(computerChoice == 2)
+		computer = "Paper";
+	else if(computerChoice == 3)
+		computer = "Rock";
+	else if(computerChoice == 4)
+		computer = "Lizard";
+	else
+		computer = "Spock";
+		
+	cout << "Bot 1 Chose: " << player << endl;
+	cout << "Bot 2 Chose: " << computer << endl;
+	
+	//Decide Winner
 	//1 Scissors, beats paper and lizard, loses too spock and rock
 	//2 Paper, beats spock and rock, loses to lizard and scissors
 	//3 Rock, beats lizard and scissors, loses to spock and paper
@@ -75,48 +107,73 @@ int Evaluate::getWinner(int player, int computer) {
 	//Computer wins, return 2
 	//Tie, return 3
 	
-	if(player == 1) {
-		if(computer == 2 || computer == 4) 
+	if(playerChoice == 1) {
+		if(computerChoice == 2 || computerChoice == 4) 
 			winner = 1;
-		else if(computer == 3 || computer == 5)
+		else if(computerChoice == 3 || computerChoice == 5)
 			winner = 2;
 		else
 			winner = 3;
 	}
-	else if(player == 2) {
-		if(computer == 3 || computer == 5)
+	else if(playerChoice == 2) {
+		if(computerChoice == 3 || computerChoice == 5)
 			winner = 1;
-		else if(computer == 1 || computer == 4)
+		else if(computerChoice == 1 || computerChoice == 4)
 			winner = 2;
 		else
 			winner = 3;
 	}
-	else if(player == 3) {
-		if(computer == 1 || computer == 4) 
+	else if(playerChoice == 3) {
+		if(computerChoice == 1 || computerChoice == 4) 
 			winner = 1;
-		else if(computer == 2 || computer == 5)
+		else if(computerChoice == 2 || computerChoice == 5)
 			winner = 2;
 		else
 			winner = 3;
 	}
-	else if(player == 4) {
-		if(computer == 2 || computer == 5)
+	else if(playerChoice == 4) {
+		if(computerChoice == 2 || computerChoice == 5)
 			winner = 1;
-		else if(computer == 1 || computer == 3)
+		else if(computerChoice == 1 || computerChoice == 3)
 			winner = 2;
 		else
 			winner = 3;
 	}
-	else if(player == 5) {
-		if(computer == 1 || computer == 3)
+	else if(playerChoice == 5) {
+		if(computerChoice == 1 || computerChoice == 3)
 			winner = 1;
-		else if(computer == 2 || computer == 4)
+		else if(computerChoice == 2 || computerChoice == 4)
 			winner = 2;
 		else
 			winner = 3;
 	}
 	else
 		winner = 0;
+		
+	//Display Results
 	
-	return winner;
+	if(winner == 1) {
+		cout << "Bot 1 won!\n" << endl;
+		bot1++;
+		played++;
+
+	}
+	else if(winner == 2) {
+		cout << "Bot 2 won!\n" << endl;
+		bot2++;
+		played++;
+	}
+	else if(winner == 3) {
+		cout << "They tied!\n" << endl;
+		tied++;
+		played++;
+	}
+	else
+		cout << "ERROR!\n" << endl;
+		
+	//Display Stats
+	cout << "Games Bot 1 won: " << bot1 << " -- Percentage: " << (bot1/played)*100 << "%" << endl;
+	cout << "Games Bot 2 won: " << bot2 << " -- Percentage: " << (bot2/played)*100 << "%" << endl;
+	cout << "Games they tied: " << tied << " -- Percentage: " << (tied/played)*100 << "%" << endl;
+	cout << "Total played: " << played << endl << endl;
 }

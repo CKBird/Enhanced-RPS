@@ -21,14 +21,18 @@ private:
 	int selection;
 };
 
-class Evaluate
+class gamePlay
 {
 public:
-	Evaluate();
-	int getWinner(int player, int computer);
+	gamePlay();
+	void playTheGame(int playerChoice, int computerChoice);
 
 private:
 	int winner;
+	float bot1;
+	float bot2;
+	float played;
+	float tied;
 };
 
 #endif
