@@ -21,7 +21,7 @@ void AIOptions::setBasicAI() {
 	selection = random;
 }
 
-int AIOptions::getBasicAI() {
+int AIOptions::getAIChoice() {
 	//returns basic AI selection to main
 	return selection;
 }
@@ -56,17 +56,9 @@ void AIOptions::setCounterAI(int past) {
 	}
 }
 
-int AIOptions::getCounterAI() {
-	return selection;
-}
-
 void AIOptions::setStubbornAI() {
 	int random = 1;
 	selection = random;
-}
-
-int AIOptions::getStubbornAI() {
-	return selection;
 }
 
 void AIOptions::setPlannedAI(int gameNum) {
@@ -82,10 +74,6 @@ void AIOptions::setPlannedAI(int gameNum) {
 	else
 		random = 5;
 	selection = random;
-}
-
-int AIOptions::getPlannedAI() {
-	return selection;
 }
 
 void AIOptions::setMostPlayedAI(gamePlay gameplay) {
@@ -129,10 +117,6 @@ void AIOptions::setMostPlayedAI(gamePlay gameplay) {
 			finalChoice = i;
 	}
 	selection = finalChoice;
-}
-
-int AIOptions::getMostPlayedAI() {
-	return selection;
 }
 
 gamePlay::gamePlay() {

@@ -32,7 +32,7 @@ int main()
 			gameplay.setPlayerID(1);
 			while(again == 1) {
 				aioptions1.setBasicAI();
-				int AIchoice = aioptions1.getBasicAI(); //Gets computer choice
+				int AIchoice = aioptions1.getAIChoice(); //Gets computer choice
 				
 				int playerChoice = 0;
 				while(playerChoice == 0) {
@@ -73,9 +73,9 @@ int main()
 			gameplay.setPlayerID(0);
 			while(again < 10000) {
 				aioptions1.setBasicAI();
-				int bot1 = aioptions1.getBasicAI();
+				int bot1 = aioptions1.getAIChoice();
 				aioptions1.setBasicAI();
-				int bot2 = aioptions1.getBasicAI();
+				int bot2 = aioptions1.getAIChoice();
 				
 				gameplay.playTheGame(bot1, bot2);
 				again++;
@@ -106,9 +106,9 @@ int main()
 				gameplay.setPlayerID(0);
 				while(again < 10000) {
 					aioptions1.setCounterAI(bot2);
-					bot1 = aioptions1.getCounterAI();
+					bot1 = aioptions1.getAIChoice();
 					aioptions1.setBasicAI();
-					bot2 = aioptions1.getBasicAI();
+					bot2 = aioptions1.getAIChoice();
 					
 					gameplay.playTheGame(bot1, bot2);
 					again++;
@@ -125,8 +125,8 @@ int main()
 				while(again < 10000) {
 					aioptions1.setCounterAI(bot2);
 					aioptions2.setCounterAI(bot1);
-					bot1 = aioptions1.getCounterAI();
-					bot2 = aioptions2.getCounterAI();
+					bot1 = aioptions1.getAIChoice();
+					bot2 = aioptions2.getAIChoice();
 					
 					gameplay.playTheGame(bot1, bot2);
 					again++;
@@ -143,8 +143,8 @@ int main()
 				while(again < 10000) {
 					aioptions1.setBasicAI();
 					aioptions2.setStubbornAI();
-					bot1 = aioptions1.getBasicAI();
-					bot2 = aioptions2.getStubbornAI();
+					bot1 = aioptions1.getAIChoice();
+					bot2 = aioptions2.getAIChoice();
 					
 					gameplay.playTheGame(bot1, bot2);
 					again++;
@@ -161,8 +161,8 @@ int main()
 				while(again < 10000) {
 					aioptions1.setBasicAI();
 					aioptions2.setPlannedAI(again);
-					bot1 = aioptions1.getBasicAI();
-					bot2 = aioptions2.getStubbornAI();
+					bot1 = aioptions1.getAIChoice();
+					bot2 = aioptions2.getAIChoice();
 					
 					gameplay.playTheGame(bot1, bot2);
 					again++;
@@ -179,8 +179,8 @@ int main()
 				while(again < 10000) {
 					aioptions1.setCounterAI(bot2);
 					aioptions2.setPlannedAI(again);
-					bot1 = aioptions1.getCounterAI();
-					bot2 = aioptions2.getStubbornAI();
+					bot1 = aioptions1.getAIChoice();
+					bot2 = aioptions2.getAIChoice();
 					
 					gameplay.playTheGame(bot1, bot2);
 					again++;
@@ -197,8 +197,8 @@ int main()
 				while(again < 10000) {
 					aioptions1.setPlannedAI(again);
 					aioptions2.setPlannedAI(again);
-					bot1 = aioptions1.getPlannedAI();
-					bot2 = aioptions2.getPlannedAI();
+					bot1 = aioptions1.getAIChoice();
+					bot2 = aioptions2.getAIChoice();
 					
 					gameplay.playTheGame(bot1, bot2);
 					again++;
@@ -215,8 +215,8 @@ int main()
 				while(again < 10000) {
 					aioptions1.setBasicAI();
 					aioptions2.setMostPlayedAI(gameplay);
-					bot1 = aioptions1.getBasicAI();
-					bot2 = aioptions2.getMostPlayedAI();
+					bot1 = aioptions1.getAIChoice();
+					bot2 = aioptions2.getAIChoice();
 					
 					gameplay.playTheGame(bot1, bot2);
 					again++;
@@ -233,8 +233,8 @@ int main()
 				while(again < 10000) {
 					aioptions1.setPlannedAI(again);
 					aioptions2.setMostPlayedAI(gameplay);
-					bot1 = aioptions1.getPlannedAI();
-					bot2 = aioptions2.getMostPlayedAI();
+					bot1 = aioptions1.getAIChoice();
+					bot2 = aioptions2.getAIChoice();
 					
 					gameplay.playTheGame(bot1, bot2);
 					again++;
@@ -251,8 +251,8 @@ int main()
 				while(again < 10000) {
 					aioptions1.setCounterAI(bot2);
 					aioptions2.setMostPlayedAI(gameplay);
-					bot1 = aioptions1.getCounterAI();
-					bot2 = aioptions2.getMostPlayedAI();
+					bot1 = aioptions1.getAIChoice();
+					bot2 = aioptions2.getAIChoice();
 					
 					gameplay.playTheGame(bot1, bot2);
 					again++;

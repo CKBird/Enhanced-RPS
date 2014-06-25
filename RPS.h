@@ -38,15 +38,11 @@ class AIOptions
 public:
 	AIOptions();
 	void setBasicAI();
-	int getBasicAI();
 	void setCounterAI(int past); //Round 1; Random, Round 2+; Counters previous rounds
-	int getCounterAI();
 	void setStubbornAI();
-	int getStubbornAI();
 	void setPlannedAI(int gameNum);
-	int getPlannedAI();
 	void setMostPlayedAI(gamePlay gameplay);
-	int getMostPlayedAI();
+	int getAIChoice();
 	
 private:
 	int selection;
