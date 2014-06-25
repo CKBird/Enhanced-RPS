@@ -8,19 +8,6 @@
 
 using namespace std;
 
-class AIOptions
-{
-public:
-	AIOptions();
-	void setBasicAI();
-	int getBasicAI();
-	void setCounterAI(int past); //Round 1; Random, Round 2+; Counters previous rounds
-	int getCounterAI();
-	
-private:
-	int selection;
-};
-
 class gamePlay
 {
 public:
@@ -29,6 +16,8 @@ public:
 	void setPlayerID(int ID) 	{ playerID = ID; }
 	int getPlayerID() 			{ return playerID; }
 	void printStats();
+	int getBot1Choice(int i)	{ return bot1Choice[i]; }
+	void wipeGameStats();
 
 private:
 	int winner;
@@ -42,6 +31,25 @@ private:
 	int bot2Choice[5];
 	string types[5];
 	string typesInit[5];
+};
+
+class AIOptions
+{
+public:
+	AIOptions();
+	void setBasicAI();
+	int getBasicAI();
+	void setCounterAI(int past); //Round 1; Random, Round 2+; Counters previous rounds
+	int getCounterAI();
+	void setStubbornAI();
+	int getStubbornAI();
+	void setPlannedAI(int gameNum);
+	int getPlannedAI();
+	void setMostPlayedAI(gamePlay gameplay);
+	int getMostPlayedAI();
+	
+private:
+	int selection;
 };
 
 #endif

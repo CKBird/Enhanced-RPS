@@ -59,14 +59,81 @@ void AIOptions::setCounterAI(int past) {
 int AIOptions::getCounterAI() {
 	return selection;
 }
-/*
-void AIOptions::(int past) { 
-		
-}	
 
-int AIOptions::() {
+void AIOptions::setStubbornAI() {
+	int random = 1;
+	selection = random;
+}
+
+int AIOptions::getStubbornAI() {
 	return selection;
-}	*/
+}
+
+void AIOptions::setPlannedAI(int gameNum) {
+	int random = 0;
+	if(gameNum < 2000)
+		random = 1;
+	else if(gameNum < 4000)
+		random = 2;
+	else if(gameNum < 6000)
+		random = 3;
+	else if(gameNum < 8000)
+		random = 4;
+	else
+		random = 5;
+	selection = random;
+}
+
+int AIOptions::getPlannedAI() {
+	return selection;
+}
+
+void AIOptions::setMostPlayedAI(gamePlay gameplay) {
+	int mostPlayed = 0;
+	for(int i = 0; i < 5; i++) {
+		if(gameplay.getBot1Choice(i) > mostPlayed)
+			mostPlayed = gameplay.getBot1Choice(i);
+	}
+	int mostPlayedCounter[5]; //Loses to -1 and +2
+	for(int i = 0; i < 5; i++)
+		mostPlayedCounter[i] = 0;
+		
+	for(int i = 0; i < 5; i++) {
+		if(gameplay.getBot1Choice(i) == mostPlayed) { //Incrementing the counters to most played
+			if(i == 0) { //Selection 1
+				mostPlayedCounter[4]++;
+				mostPlayedCounter[2]++;
+			}
+			else if(i == 1) {
+				mostPlayedCounter[0]++;
+				mostPlayedCounter[3]++;
+			}
+			else if(i == 2) {
+				mostPlayedCounter[1]++;
+				mostPlayedCounter[4]++;
+			}
+			else if(i == 3) {
+				mostPlayedCounter[2]++;
+				mostPlayedCounter[0]++;
+			}
+			else if(i == 4) {
+				mostPlayedCounter[3]++;
+				mostPlayedCounter[1]++;
+			}			
+		} //Once Finished, mostPlayedConuter has total counts of best counter
+	}
+	
+	int finalChoice = 0;
+	for(int i = 0; i < 5; i++) {
+		if(mostPlayedCounter[i] > finalChoice)
+			finalChoice = i;
+	}
+	selection = finalChoice;
+}
+
+int AIOptions::getMostPlayedAI() {
+	return selection;
+}
 
 gamePlay::gamePlay() {
 	winner = -1;
@@ -247,4 +314,20 @@ void gamePlay::printStats() {
 			cout << bot1Choice[i] << " --- " << bot2Choice[i] << " --- " << types[i] << endl;
 		}
 		cout << endl;
+}
+
+void gamePlay::wipeGameStats() {
+	for(int i = 0; i < 5; i++) {
+		bot1Choice[i] = 0;
+		bot2Choice[i] = 0;
+		for(int j = 0; j < 5; j++) {
+			choiceStats[i][j] = 0;
+		}
+	}
+	winner = 0;
+	bot1 = 0;
+	bot2 = 0;
+	played = 0;
+	tied = 0;
+	playerID = 0;
 }
