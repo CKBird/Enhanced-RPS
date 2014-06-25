@@ -21,11 +21,6 @@ void AIOptions::setBasicAI() {
 	selection = random;
 }
 
-int AIOptions::getAIChoice() {
-	//returns basic AI selection to main
-	return selection;
-}
-
 void AIOptions::setCounterAI(int past) {
 	if(past == 0) {
 		int random = rand() % 5 + 1;
@@ -117,6 +112,10 @@ void AIOptions::setMostPlayedAI(gamePlay gameplay) {
 			finalChoice = i;
 	}
 	selection = finalChoice;
+}
+
+int AIOptions::getAIChoice() {
+	return selection;
 }
 
 gamePlay::gamePlay() {

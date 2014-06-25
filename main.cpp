@@ -260,9 +260,7 @@ int main()
 				gameplay.printStats();
 				gameplay.wipeGameStats();
 			}
-			//MUST ADD IN MOST PLAYED AI GAME HERE
-			//MUST GET BOT1CHOICE INTO CORRECT SCOPE
-			//ONLY BOT2 CAN BE MOSTPLAYEDAI
+
 			else if(subChoice == 0) {
 				cout << "Returning to Main Menu" << endl;
 			}
